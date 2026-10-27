@@ -1,0 +1,55 @@
+# -------------------------
+# Python
+# -------------------------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# -------------------------
+# Secrets / environment
+# -------------------------
+.env
+*.env
+airflow/.env
+
+# Allow safe example env files later
+!.env.example
+
+# -------------------------
+# Airflow runtime
+# -------------------------
+airflow/logs/
+airflow/**/__pycache__/
+
+# -------------------------
+# Spark runtime / output
+# -------------------------
+output/
+checkpoints/
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Spark / Hadoop temporary files
+*.crc
+_SUCCESS
+
+# Generated data files
+*.parquet
+
+# -------------------------
+# IDE / OS
+# -------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Python packaging
+# -------------------------
+build/
+dist/
+*.egg-info/

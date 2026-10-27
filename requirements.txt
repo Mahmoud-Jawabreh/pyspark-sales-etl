@@ -1,0 +1,8 @@
+pyspark
+delta-spark
+confluent-kafka
+pytest
+deltalake
+pandas
+pyarrow
+PyYAML

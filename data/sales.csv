@@ -1,0 +1,13 @@
+sale_id,product_id,product_name,quantity,price,customer_id
+1,101,Laptop,2,3500.00,C001
+2,102,Mouse,5,120.00,C002
+3,101,Laptop,1,3500.00,C003
+4,103,Keyboard,3,250.00,C001
+5,102,Mouse,2,120.00,C004
+6,104,Monitor,2,900.00,C002
+7,103,Keyboard,0,250.00,C005
+8,101,Laptop,3,3500.00,C006
+9,104,Monitor,1,900.00,C003
+10,102,Mouse,-1,120.00,C007
+11,105,Headset,4,300.00,C004
+12,103,Keyboard,2,250.00,C008

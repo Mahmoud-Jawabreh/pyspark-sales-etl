@@ -1,0 +1,6 @@
+sale_id,customer_id,product,quantity,price,product_id
+1,1001,Laptop,2,3500.0,101
+2,1002,Mouse,1,120.0,102
+3,,Keyboard,1,250.0,103
+4,1004,Monitor,2,900.0,104
+5,1005,Headset,0,300.0,105

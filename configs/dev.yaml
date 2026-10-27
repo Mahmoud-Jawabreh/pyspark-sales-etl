@@ -1,0 +1,33 @@
+app:
+  name: pyspark-sales-etl
+
+spark:
+  master: "local[2]"
+  shuffle_partitions: 8
+  adaptive_enabled: true
+
+quality:
+  max_rejected_ratio: 0.50
+
+kafka:
+  bootstrap_servers: "localhost:9092"
+  sales_topic: "sales-keyed-events"
+  cdc_topic: "sales-cdc-events"
+
+paths:
+  sales_input: "data/sales_batch_input.csv"
+  batch_sales_output: "output/batch/sales_clean"
+  
+  bronze_sales: "output/delta/bronze_sales"
+  silver_sales: "output/delta/silver_sales"
+  quarantine_sales: "output/delta/quarantine_stream_sales"
+
+  bronze_sales_cdc: "output/delta/bronze_sales_cdc"
+  silver_sales_cdc: "output/delta/silver_sales_cdc_safe"
+
+  dim_customer: "output/delta/dim_customer_scd2"
+  dim_product: "output/delta/dim_product"
+
+  fact_sales: "output/delta/fact_sales_gold"
+
+  checkpoints_root: "output/checkpoints"
