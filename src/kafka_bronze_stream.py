@@ -12,6 +12,9 @@ from pyspark.sql.functions import (
     current_timestamp,
 )
 
+from streaming.health import (
+    print_stream_health,
+)
 
 # --------------------------------------------------
 # CONFIGURATION
@@ -145,4 +148,15 @@ print(f"Checkpoint: {CHECKPOINT_PATH}")
 print("\nPress CTRL+C to stop.\n")
 
 
-query.awaitTermination()
+# query.awaitTermination()
+
+import time
+
+
+while query.isActive:
+
+    time.sleep(10)
+
+    print_stream_health(
+        query
+    ) 
