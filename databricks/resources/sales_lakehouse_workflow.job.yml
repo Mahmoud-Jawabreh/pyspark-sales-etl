@@ -1,0 +1,42 @@
+resources:
+  jobs:
+    sales_lakehouse_workflow:
+      name: sales_lakehouse_workflow
+      tasks:
+        - task_key: refresh_sales_pipeline
+          disabled: false
+          email_notifications: {}
+          pipeline_task:
+            pipeline_id: b6139bf3-b12d-4208-b328-8bb8e577cab7
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+          webhook_notifications: {}
+        - task_key: validate_sales_outputs
+          depends_on:
+            - task_key: refresh_sales_pipeline
+          disabled: false
+          email_notifications: {}
+          notebook_task:
+            base_parameters:
+              catalog_name: workspace
+              job_run_id: '{{job.run_id}}'
+              max_quarantine_ratio: "0.5"
+              schema_name: de_learning
+            notebook_path: ../src/06_validate_sales_outputs.ipynb
+            source: WORKSPACE
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+          webhook_notifications: {}
+      email_notifications:
+        no_alert_for_skipped_runs: false
+      max_concurrent_runs: 1
+      performance_target: PERFORMANCE_OPTIMIZED
+      queue:
+        enabled: true
+      timeout_seconds: 0
+      trigger:
+        pause_status: PAUSED
+        periodic:
+          interval: 1
+          unit: DAYS
+      webhook_notifications: {}

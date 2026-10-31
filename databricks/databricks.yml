@@ -1,0 +1,12 @@
+bundle:
+  name: sales_lakehouse
+
+include:
+  - resources/*.yml
+
+targets:
+  learning:
+    default: true
+    workspace:
+      host: https://dbc-127a1fcf-e5ca.cloud.databricks.com/editor/files/952338416496387?contextId=pipeline%3Ab6139bf3-b12d-4208-b328-8bb8e577cab7&ensureOpenPanels=true&o=7474652762590905
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}

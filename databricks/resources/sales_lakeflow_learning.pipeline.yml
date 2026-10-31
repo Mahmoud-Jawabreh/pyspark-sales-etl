@@ -1,0 +1,16 @@
+resources:
+  pipelines:
+    sales_lakeflow_learning:
+      name: sales_lakeflow_learning
+      configuration:
+        "sales.source_path": "/Volumes/workspace/de_learning/sales_landing/lesson_05/incoming"
+      libraries:
+        - glob:
+            include: ../src/transformations/**
+      catalog: workspace
+      channel: CURRENT
+      continuous: false
+      photon: true
+      root_path: ../src
+      schema: de_learning
+      serverless: true

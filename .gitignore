@@ -6,6 +6,7 @@ venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.ipynb_checkpoints/
 
 # -------------------------
 # Secrets / environment
@@ -53,3 +54,10 @@ Thumbs.db
 build/
 dist/
 *.egg-info/
+
+
+# -------------------------
+# Databricks
+# -------------------------
+.databricks/
+.databrickscfg
