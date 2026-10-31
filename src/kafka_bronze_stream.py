@@ -1,6 +1,8 @@
 import os
 import sys
 
+import signal
+
 os.environ["PYSPARK_PYTHON"] = sys.executable
 os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 
@@ -150,13 +152,60 @@ print("\nPress CTRL+C to stop.\n")
 
 # query.awaitTermination()
 
-import time
+shutdown_requested = False
 
 
-while query.isActive:
+def request_shutdown(
+    signum,
+    frame,
+):
+    global shutdown_requested
 
-    time.sleep(10)
+    print(
+        f"Shutdown signal received: {signum}"
+    )
 
-    print_stream_health(
-        query
-    ) 
+    shutdown_requested = True
+
+
+signal.signal(
+    signal.SIGINT,
+    request_shutdown,
+)
+
+signal.signal(
+    signal.SIGTERM,
+    request_shutdown,
+)
+
+
+try:
+
+    while (
+        query.isActive
+        and not shutdown_requested
+    ):
+
+        # Wait for up to 10 seconds.
+        # Returns early if the query terminates.
+        query.awaitTermination(10)
+
+        if query.isActive:
+
+            print_stream_health(
+                query
+            )
+
+
+finally:
+    try:
+        if query.isActive:
+            print("Stopping streaming query...")
+            query.stop()
+
+    finally:
+        print("Stopping SparkSession...")
+        spark.stop()
+
+    print("Shutdown completed.")
+    
